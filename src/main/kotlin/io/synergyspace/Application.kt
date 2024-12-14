@@ -10,8 +10,15 @@ import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
+import io.synergyspace.auth.infrastructure.controller.authRouting
+import io.synergyspace.auth.infrastructure.controller.configureAuth
+import io.synergyspace.common.infrastructure.AppSerializersModule
 import io.synergyspace.common.infrastructure.DatabaseFactory
+import io.synergyspace.user.infrastructure.table.UserTable
 import kotlinx.serialization.json.Json
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.transactions.transaction
+import org.koin.ktor.plugin.Koin
 import org.slf4j.LoggerFactory
 
 fun main(args: Array<String>) {
@@ -28,14 +35,26 @@ fun Application.module() {
 
     DatabaseFactory.init(environment.config)
 
+    transaction {
+        SchemaUtils.createMissingTablesAndColumns(UserTable)
+    }
+
+    install(Koin) {
+        modules(appModule)
+    }
+
+    configureAuth()
+
     install(ContentNegotiation) {
         json(Json {
             prettyPrint = true
             isLenient = true
+            serializersModule = AppSerializersModule
         })
     }
 
     routing {
+        authRouting()
         get("/") {
             call.respondText("Welcome to SynergySpace", contentType = ContentType.Text.Plain)
         }
