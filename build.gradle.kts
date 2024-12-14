@@ -6,6 +6,7 @@ val postgresVersion: String by project
 val auth0Version: String by project
 val bcryptVersion: String by project
 val koinVersion: String by project
+val hikariVersion: String by project
 
 plugins {
     kotlin("jvm") version "2.1.0"
@@ -30,7 +31,7 @@ kotlin {
 }
 
 application {
-    mainClass.set("io.synergyspace.ApplicationKt")
+    mainClass.set("io.ktor.server.netty.EngineMain")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
@@ -63,8 +64,9 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
 
-    // PostgreSQL Driver
+    // PostgreSQL Driver and HikariCP
     implementation("org.postgresql:postgresql:$postgresVersion")
+    implementation("com.zaxxer:HikariCP:$hikariVersion")
 
     // Logging
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
