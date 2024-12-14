@@ -1,6 +1,0 @@
-ktor:
-  application:
-    modules:
-      - io.synergyspace.ApplicationKt.module
-  deployment:
-    port: 8080
