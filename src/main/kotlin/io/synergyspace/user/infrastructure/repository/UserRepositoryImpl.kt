@@ -7,6 +7,7 @@ import io.synergyspace.user.infrastructure.table.UserTable
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.selectAll
 import java.util.UUID
 
 class UserRepositoryImpl : UserRepository {
@@ -21,13 +22,13 @@ class UserRepositoryImpl : UserRepository {
     }
 
     override suspend fun findByUsername(username: String): User? = dbQuery {
-        UserTable.select(UserTable.username eq username)
+        UserTable.selectAll().where(UserTable.username eq username)
             .map(::rowToUser)
             .singleOrNull()
     }
 
     override suspend fun findById(id: UUID): User? = dbQuery {
-        UserTable.select(UserTable.id eq id)
+        UserTable.selectAll().where(UserTable.id eq id)
             .map(::rowToUser)
             .singleOrNull()
     }

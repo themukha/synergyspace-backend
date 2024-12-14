@@ -57,8 +57,12 @@ fun Route.authRouting() {
     post("/login") {
         val credential = call.receive<Credential>()
         val user = authService.login(credential)
-        val responseBody = mapOf("token" to application.generateToken(credential))
         if (user != null) {
+            val token = application.generateToken(Credential(
+                login = user.username,
+                userId = user.id,
+            ))
+            val responseBody = mapOf("token" to token)
             call.respond(status = HttpStatusCode.OK, message = responseBody)
         } else {
             call.respond(HttpStatusCode.Unauthorized)
