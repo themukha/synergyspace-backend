@@ -1,7 +1,7 @@
-FROM gradle:8.4-jdk2 AS build
+FROM gradle:8.4-jdk21-alpine AS build
 WORKDIR /app
 COPY . /app
-RUN gradle buildFatJar --no-daemon
+RUN ./gradlew jib
 
 FROM openjdk:21-slim-buster
 EXPOSE 8080
