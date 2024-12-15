@@ -20,7 +20,6 @@ import io.ktor.server.response.respond
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.application
-import io.ktor.server.routing.header
 import io.ktor.server.routing.route
 import io.synergyspace.auth.domain.service.AuthService
 import io.synergyspace.common.auth.domain.util.generateToken
