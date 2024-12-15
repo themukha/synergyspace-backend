@@ -23,12 +23,8 @@ version = "0.0.1-snapshot"
 
 ktor {
     fatJar {
-        archiveFileName.set("SynergySpace.jar")
+        archiveFileName.set("synergyspace.jar")
     }
-}
-
-kotlin {
-    jvmToolchain(21)
 }
 
 application {
@@ -36,6 +32,24 @@ application {
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
+}
+
+jib {
+    from {
+        image = "eclipse-temurin:21-jre-alpine"
+    }
+    to {
+        image = "georgymukha/synergyspace:${project.version}"
+    }
+    container {
+        mainClass = application.mainClass.get()
+        ports = listOf("8080/tcp")
+        jvmFlags = application.applicationDefaultJvmArgs.toList()
+    }
+}
+
+kotlin {
+    jvmToolchain(21)
 }
 
 repositories {

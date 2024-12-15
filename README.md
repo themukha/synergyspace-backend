@@ -47,6 +47,7 @@ To build or run the project, use one of the following tasks:
 
 | Task                          | Description                                                          |
 |-------------------------------|----------------------------------------------------------------------|
+| `./gradlew jib`               | Build docker image and push it to the Docker Hub                     |
 | `./gradlew run`               | Run the server                                                       |
 | `./gradlew test`              | Run the tests                                                        |
 | `./gradlew build`             | Build everything                                                     |
