@@ -7,6 +7,7 @@ val auth0Version: String by project
 val bcryptVersion: String by project
 val koinVersion: String by project
 val hikariVersion: String by project
+val smileySwaggerVersion: String by project
 
 plugins {
     kotlin("jvm") version "2.1.0"
@@ -42,7 +43,7 @@ repositories {
 }
 
 dependencies {
-    // Ktor
+    // Ktor and swagger
     implementation("io.ktor:ktor-server-core-jvm")
     implementation("io.ktor:ktor-server-netty-jvm")
     implementation("io.ktor:ktor-server-content-negotiation-jvm")
@@ -50,9 +51,8 @@ dependencies {
     implementation("io.ktor:ktor-server-auth")
     implementation("io.ktor:ktor-server-auth-jwt")
     implementation("io.ktor:ktor-server-cors")
-    implementation("io.ktor:ktor-server-swagger")
-    implementation("io.ktor:ktor-server-openapi")
     implementation("io.ktor:ktor-server-config-yaml-jvm")
+    implementation("io.github.smiley4:ktor-swagger-ui:$smileySwaggerVersion")
 
     // Kotlin Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxVersion")

@@ -7,6 +7,5 @@ interface AuthService {
 
     @Throws(Exception::class)
     suspend fun register(credential: Credential): User
-
     suspend fun login(credential: Credential): User?
 }
