@@ -5,6 +5,6 @@ RUN gradle buildFatJar --no-daemon
 
 FROM openjdk:21-slim-buster
 WORKDIR /app
-COPY --from=build /app/build/libs/*.jar /app/synergyspace.jar
 EXPOSE 8080
+COPY --from=build /app/build/libs/*.jar /app/synergyspace.jar
 CMD ["java", "-jar", "synergyspace.jar"]
