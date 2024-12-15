@@ -52,17 +52,6 @@ kotlin {
     jvmToolchain(21)
 }
 
-sourceSets {
-    main {
-        kotlin {
-            srcDir("src/main/kotlin")
-        }
-        resources {
-            srcDir("src/main/resources")
-        }
-    }
-}
-
 repositories {
     mavenCentral()
 }
@@ -76,7 +65,6 @@ dependencies {
     implementation("io.ktor:ktor-server-auth")
     implementation("io.ktor:ktor-server-auth-jwt")
     implementation("io.ktor:ktor-server-cors")
-    implementation("io.ktor:ktor-server-config-yaml-jvm")
     implementation("io.github.smiley4:ktor-swagger-ui:$smileySwaggerVersion")
 
     // Kotlin Coroutines

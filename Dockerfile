@@ -7,4 +7,4 @@ FROM openjdk:21-slim-buster
 WORKDIR /app
 EXPOSE 8080
 COPY --from=build /app/build/libs/*.jar /app/synergyspace.jar
-CMD ["java", "-jar", "synergyspace.jar"]
+CMD ["java", "-jar", "synergyspace.jar", "--config=application.conf"]
